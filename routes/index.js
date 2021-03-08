@@ -24,7 +24,7 @@ router.post("/createBlog", async (req, res) => {
 
   try {
     const dbRes = await dbController.createBlog(req.body);
-    res.send({ done: dbRes });
+    // res.send({ done: dbRes });
     res.redirect("/");
   } catch (e) {
     console.log("Error", e);
