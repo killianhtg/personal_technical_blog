@@ -1,13 +1,48 @@
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Technical Blog</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
 
-<head>
-  <title>Express</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
-</head>
+  <body>
+    <h1>Personal Technical Blog</h1>
+    <p>Welcome to PTB</p>
 
-<body>
-  <h1>Express</h1>
-  <p>Welcome to Express</p>
-</body>
+    <div class="container">
+      <h2>Blogs</h2>
+      <div id="blog-lists"></div>
+    </div>
 
+    <form action="/createBlog" method="post">
+      Create Blog
+      <div>
+        <label class="form-label"
+          >Name: <input class="form-control" type="text" name="name"
+        /></label>
+      </div>
+      <div>
+        <label class="form-label"
+          >Content: <input class="form-control" type="text" name="content"
+        /></label>
+      </div>
+      <div><button type="submit" class="btn btn-primary">Create</button></div>
+    </form>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="./javascripts/main.js"></script>
+  </body>
 </html>
