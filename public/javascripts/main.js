@@ -23,7 +23,8 @@ async function reloadPage() {
   const resRaw = await fetch("/getBlogs");
   const res = await resRaw.json();
 
-  console.log("Got data", res);
+  console.log("Got data");
+  // console.log(res);
 
   if (res.blogs) {
     res.blogs.forEach(renderBlog);

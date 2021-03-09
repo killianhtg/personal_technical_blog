@@ -4,8 +4,8 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('personal-technical-blog:server');
+var app = require("../app");
+var debug = require("debug")("personal-technical-blog:server");
 var http = require('http');
 
 /**

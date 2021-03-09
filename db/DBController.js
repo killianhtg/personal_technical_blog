@@ -38,7 +38,8 @@ function DBController() {
       const blogsCol = db.collection("blogs");
       console.log("Collection ready, querying with ", query);
       const blogs = await blogsCol.find(query).toArray();
-      console.log("Got blogs", blogs);
+      console.log("Got blogs");
+      //console.log(blogs);
 
       return blogs;
     } finally {

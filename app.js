@@ -1,11 +1,21 @@
 var express = require("express");
+var app = express();
 var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
 
+var session = require("express-session");
+//var FileStore = require("session-file-store")(session);
+var cookieParser = require("cookie-parser");
+
+var logger = require("morgan");
 var indexRouter = require("./routes/index");
 
-var app = express();
+app.use(
+  session({
+    secret: "tech blog", // to encrypt
+    //store: new FileStore(),
+    cookie: { maxAge: 10 * 60 * 1000 },
+  })
+);
 
 app.use(logger("dev"));
 app.use(express.json());
