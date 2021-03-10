@@ -30,7 +30,7 @@
       <div id="user-ctl" class="row">
         <div class="col-3">
           <p>login to add blog</p>
-          <form id="login" action="/login" method="post">
+          <form id="login" action="/user/login" method="post">
             <div class="mb-3">
               <label class="form-label">Username</label>
               <input
@@ -52,7 +52,7 @@
             <button type="submit" class="btn btn-primary">Login</button>
           </form>
 
-          <form action="/logout" method="get">
+          <form action="/user/logout" method="get">
             <button type="submit" class="btn btn-primary">Logout</button>
           </form>
         </div>
