@@ -1,13 +1,14 @@
-var express = require("express");
-var app = express();
-var path = require("path");
+const express = require("express");
+const app = express();
+const path = require("path");
 
-var session = require("express-session");
-//var FileStore = require("session-file-store")(session);
-var cookieParser = require("cookie-parser");
+const session = require("express-session");
+//const FileStore = require("session-file-store")(session);
+const cookieParser = require("cookie-parser");
 
-var logger = require("morgan");
-var indexRouter = require("./routes/index");
+const logger = require("morgan");
+const indexRouter = require("./routes/index");
+var usersRouter = require("./routes/users");
 
 app.use(
   session({
@@ -24,5 +25,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public"))); // locate the static resources
 
 app.use("/", indexRouter);
+app.use("/users", usersRouter);
 
 module.exports = app;
