@@ -1,30 +1,20 @@
 const { MongoClient } = require("mongodb");
+var MongoPool = require("./DBUtil.js");
 
 function DBController() {
   const dbController = {};
-  // TODO: implement connection and function to database
-  const url =
+  var url =
     "mongodb+srv://web-team:web-team-project@clusterpersonaltecblog.vjh3y.mongodb.net/personalTecBlogDB?retryWrites=true&w=majority";
   const DB_NAME = "personalTecBlogDB";
 
   dbController.createBlog = async (blog) => {
-    let client;
-    try {
-      client = new MongoClient(url, { useUnifiedTopology: true });
-      console.log("Connecting to the db");
-      await client.connect();
-      console.log("Connected!");
-      const db = client.db(DB_NAME);
-      const blogCol = db.collection("blogs");
-      console.log("Blogs Collection ready, insert ", blog);
-      const res = await blogCol.insertOne(blog);
+    MongoPool.getInstance(function (client) {
+      const blogCol = client.db.collection("blogs");
+      //console.log("Blogs Collection ready, insert ", blog);
+      const res = blogCol.insertOne(blog);
       console.log("Inserted", res);
-
       return res;
-    } finally {
-      console.log("Closing the connection");
-      client.close();
-    }
+    });
   };
 
   dbController.getBlogs = async (query = {}) => {
@@ -48,25 +38,22 @@ function DBController() {
     }
   };
 
-  dbController.getUsers = async (query = {}) => {
-    let client;
-    try {
-      client = new MongoClient(url, { useUnifiedTopology: true });
-      console.log("Connecting to the db");
-      await client.connect();
-      console.log("Connected!");
-      const db = client.db(DB_NAME);
-      const usersCol = db.collection("users");
-      console.log("Users Collection ready, querying with ", query);
-      const users = await usersCol.find(query).toArray();
-      console.log("Got users");
-      //console.log(blogs);
-
-      return users;
-    } finally {
-      console.log("Closing the connection");
-      client.close();
-    }
+  dbController.createBlog = async (blog) => {
+    MongoPool.getInstance(function (client) {
+      const blogCol = client.db.collection("blogs");
+      //console.log("Blogs Collection ready, insert ", blog);
+      const res = blogCol.insertOne(blog);
+      console.log("Inserted", res);
+      return res;
+    });
+  };
+  dbController.getUser = async function a(name) {
+    var pwd;
+    MongoPool.getInstance(function (client) {
+      const users = client.db.collection("users");
+      pwd = users.find({ username: name }).toArray();
+    });
+    return pwd;
   };
 
   return dbController;

@@ -3,7 +3,7 @@ const app = express();
 const path = require("path");
 
 const session = require("express-session");
-//const FileStore = require("session-file-store")(session);
+const FileStore = require("session-file-store")(session);
 const cookieParser = require("cookie-parser");
 
 const logger = require("morgan");
@@ -13,7 +13,7 @@ var usersRouter = require("./routes/users");
 app.use(
   session({
     secret: "tech blog", // to encrypt
-    //store: new FileStore(),
+    store: new FileStore(),
     cookie: { maxAge: 10 * 60 * 1000 },
   })
 );
