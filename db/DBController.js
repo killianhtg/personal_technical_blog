@@ -16,7 +16,7 @@ function DBController() {
       console.log("Connected!");
       const db = client.db(DB_NAME);
       const blogCol = db.collection("blogs");
-      console.log("Collection ready, insert ", blog);
+      console.log("Blogs Collection ready, insert ", blog);
       const res = await blogCol.insertOne(blog);
       console.log("Inserted", res);
 
@@ -36,12 +36,33 @@ function DBController() {
       console.log("Connected!");
       const db = client.db(DB_NAME);
       const blogsCol = db.collection("blogs");
-      console.log("Collection ready, querying with ", query);
+      console.log("Blogs Collection ready, querying with ", query);
       const blogs = await blogsCol.find(query).toArray();
       console.log("Got blogs");
       //console.log(blogs);
 
       return blogs;
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  };
+
+  dbController.getUsers = async (query = {}) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      console.log("Connecting to the db");
+      await client.connect();
+      console.log("Connected!");
+      const db = client.db(DB_NAME);
+      const usersCol = db.collection("users");
+      console.log("Users Collection ready, querying with ", query);
+      const users = await usersCol.find(query).toArray();
+      console.log("Got users");
+      //console.log(blogs);
+
+      return users;
     } finally {
       console.log("Closing the connection");
       client.close();
