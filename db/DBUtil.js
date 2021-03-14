@@ -1,25 +1,26 @@
+// https://stackoverflow.com/questions/10656574/how-do-i-manage-mongodb-connections-in-a-node-js-web-application
 const { MongoClient } = require("mongodb");
 var url =
   "mongodb+srv://web-team:web-team-project@clusterpersonaltecblog.vjh3y.mongodb.net/personalTecBlogDB?retryWrites=true&w=majority";
 
 var option = {
-  reconnectTries: 3,
   auto_reconnect: true,
-  poolSize: 40,
+  poolSize: 20,
   connectTimeoutMS: 500,
   useNewUrlParser: true,
+  useUnifiedTopology: true,
 };
 
 function MongoPool() {}
 
-var p_db;
+var mongodb;
 
 function initPool(cb) {
   MongoClient.connect(url, option, function (err, db) {
     if (err) throw err;
 
-    p_db = db;
-    if (cb && typeof cb == "function") cb(p_db);
+    mongodb = db;
+    if (cb && typeof cb == "function") cb(mongodb);
   });
   return MongoPool;
 }
@@ -27,10 +28,10 @@ function initPool(cb) {
 MongoPool.initPool = initPool;
 
 function getInstance(cb) {
-  if (!p_db) {
+  if (!mongodb) {
     initPool(cb);
   } else {
-    if (cb && typeof cb == "function") cb(p_db);
+    if (cb && typeof cb == "function") cb(mongodb);
   }
 }
 MongoPool.getInstance = getInstance;
