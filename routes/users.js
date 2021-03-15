@@ -1,16 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const dbController = require("../db/DBController.js");
 
 /* GET users listing. */
-// user
-
 // TODO: change the logic to get users data from mongo db
-const users = require("./users").items;
-
-const findUser = function (username, password) {
-  return users.find(function (item) {
-    return item.username === username && item.password === password;
-  });
+const findUser = async function (username, password) {
+  const pwd = await dbController.getUser(username);
+  return password === pwd;
 };
 
 // user control
