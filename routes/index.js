@@ -28,17 +28,13 @@ router.post("/createBlog", async (req, res) => {
     "=========createBlog: " + req.session.loginUser + "=============="
   );
 
-  if (req.session.loginUser !== undefined) {
-    console.log("-----------> Create file", req.body);
-    try {
-      await dbController.createBlog(req.body);
-      res.redirect("/");
-    } catch (e) {
-      console.log("Error", e);
-      res.status(400).send({ err: e });
-    }
-  } else {
-    console.log("------------> need login to create");
+  console.log("-----------> Create file", req.body);
+  try {
+    await dbController.createBlog(req.body);
+    res.redirect("/");
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
   }
 });
 
