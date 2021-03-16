@@ -1,6 +1,11 @@
 var MongoPool = require("./DBUtil.js");
 var MongoClient = require("mongodb").MongoClient;
 var app = require("express")();
+const url =
+  "mongodb+srv://web-team:web-team-project@clusterpersonaltecblog.vjh3y.mongodb.net/personalTecBlogDB?retryWrites=true&w=majority";
+
+const client = new MongoClient(url, { useUnifiedTopology: true });
+client.connect();
 
 function DBController() {
   const dbController = {};
@@ -15,13 +20,13 @@ function DBController() {
     });
   };
 
-  dbController.getBlogs = function () {
+  dbController.getBlogs = async function () {
     var blogs;
-    MongoPool.getInstance(async function (client) {
+    await MongoPool.getInstance(async function (client) {
       console.log("==============================");
 
-      var db = client.db(DB_NAME);
-      const blogsCol = db.collection("blogs");
+      var db1 = client.db(DB_NAME);
+      const blogsCol = db1.collection("blogs");
       console.log("Blogs Collection ready=============", blogsCol);
 
       blogs = await blogsCol.find({}).toArray();

@@ -16,14 +16,12 @@ function MongoPool() {}
 var mongodb;
 
 function initPool(cb) {
-  MongoClient.connect(url, option, function (err, db) {
+  MongoClient.connect(url, option, async function (err, db) {
     if (err) throw err;
 
     console.log("[mongodb] Initialize connection pool.====================");
     mongodb = db;
     console.log("[mongodb]connection ==============" + mongodb);
-
-    if (cb && typeof cb == "function") cb(mongodb);
   });
   return MongoPool;
 }
@@ -35,11 +33,10 @@ function getInstance(cb) {
 
   if (!mongodb) {
     console.log("[mongodb]instance ==============" + mongodb);
-
     initPool(cb);
-  } else {
-    if (cb && typeof cb == "function") cb(mongodb);
   }
+
+  if (cb && typeof cb == "function") cb(mongodb);
 }
 MongoPool.getInstance = getInstance;
 
