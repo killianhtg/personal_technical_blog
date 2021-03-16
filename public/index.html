@@ -19,8 +19,8 @@
 
   <body>
     <div class="container">
-      <!-- <img id="hd-bg" src="./img/header-bg.jpg" alt="NASA-earth" /> -->
-      <div class="header">
+      <img id="hd-bg" src="./img/header-bg.jpg" alt="NASA-earth" />
+      <div id="header">
         <h1>Personal Technical Blog</h1>
         <p>Welcome to PTB</p>
       </div>
@@ -63,12 +63,11 @@
         </div>
         <div class="col-9">
           <div id="content" class="row">
-            <div id="content" class="container">
+            <div id="blogs">
               <h2>Blogs</h2>
               <div id="blog-lists"></div>
             </div>
             <form id="createBlog" action="/createBlog" method="post">
-              Create Blog
               <div>
                 <label class="form-label">Name: </label>
                 <input class="form-control" type="text" name="name" />
