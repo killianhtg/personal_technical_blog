@@ -1,5 +1,4 @@
 const { MongoClient, ObjectId } = require("mongodb");
-const MongoPool = require("./DBUtil.js");
 
 function DBController() {
   const dbController = {};
