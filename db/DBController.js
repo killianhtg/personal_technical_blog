@@ -1,5 +1,5 @@
 const { MongoClient, ObjectId } = require("mongodb");
-// const MongoPool = require("./DBUtil.js");
+const MongoPool = require("./DBUtil.js");
 
 function DBController() {
   const dbController = {};
@@ -9,30 +9,30 @@ function DBController() {
   const DB_NAME = "personalTecBlogDB";
 
   dbController.createBlog = async (blog) => {
-    // await MongoPool.getInstance(function (client) {
-    //   const blogsCol = client.db(DB_NAME).collection("blogs");
-    //   const res = blogsCol.insertOne(blog);
-    //   console.log("Inserted", res);
-    //   return res;
-    // });
-
-    let client;
-    try {
-      client = new MongoClient(url, { useUnifiedTopology: true });
-      console.log("Connecting to the db");
-      await client.connect();
-      console.log("Connected!");
-      const db = client.db(DB_NAME);
-      const blogCol = db.collection("blogs");
-      console.log("Collection ready, insert ", blog);
-      const res = await blogCol.insertOne(blog);
+    await MongoPool.getInstance(function (client) {
+      const blogsCol = client.db(DB_NAME).collection("blogs");
+      const res = blogsCol.insertOne(blog);
       console.log("Inserted", res);
-
       return res;
-    } finally {
-      console.log("Closing the connection");
-      client.close();
-    }
+    });
+
+    // let client;
+    // try {
+    //   client = new MongoClient(url, { useUnifiedTopology: true });
+    //   console.log("Connecting to the db");
+    //   await client.connect();
+    //   console.log("Connected!");
+    //   const db = client.db(DB_NAME);
+    //   const blogCol = db.collection("blogs");
+    //   console.log("Collection ready, insert ", blog);
+    //   const res = await blogCol.insertOne(blog);
+    //   console.log("Inserted", res);
+
+    //   return res;
+    // } finally {
+    //   console.log("Closing the connection");
+    //   client.close();
+    // }
   };
 
   // dbController.getBlogs = async function () {
