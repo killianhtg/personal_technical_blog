@@ -4,11 +4,6 @@ body {
   padding: 70px;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
 html,
 body {
   height: 100%;
@@ -25,8 +20,6 @@ body {
 #header {
   background-color: rgb(176, 119, 119);
   padding: 50px;
-  /*  background-image: url(./img/header-bg.jpg);
-  background-attachment: fixed;*/
 }
 
 #fullContent {
@@ -60,7 +53,7 @@ a {
   z-index: -1;
 }
 
-#nav {
+nav {
   background-color: rgb(176, 119, 119);
   padding: 50px;
 }
