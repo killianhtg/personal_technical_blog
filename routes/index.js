@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const path = require("path");
 
 const dbController = require("../db/DBController.js");
 
@@ -39,6 +40,26 @@ router.post("/createBlog", async (req, res) => {
   } else {
     console.log("------------> need login to create");
   }
+});
+
+router.post("/deleteBlog", async (req, res) => {
+  console.log(
+    "=========deleteBlog: " + req.session.loginUser + "=============="
+  );
+
+  try {
+    console.log("myDB", dbController);
+    console.log("deleteBlog Req boduy", req.body);
+    await dbController.deleteBlog(req.body);
+    res.redirect("/");
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
+router.get("/blog/:param", (req, res) => {
+  res.sendFile(path.join(__dirname, "/../public/blogDetail.html"));
 });
 
 module.exports = router;
