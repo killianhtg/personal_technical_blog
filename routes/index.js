@@ -81,7 +81,7 @@ const findUser = async function (username, password) {
 };
 
 // user control
-router.post("/login", function (req, res) {
+router.post("/login", async function (req, res) {
   let name = req.body.username;
   let exist = findUser(name, req.body.password);
 
@@ -89,13 +89,15 @@ router.post("/login", function (req, res) {
 
   if (exist) {
     req.session.loginUser = name;
+    console.log("======session: " + req.session.loginUser + "===========");
+
     res.send({ code: 0, msg: "Success" });
   } else {
     res.send({ code: 1, msg: "Incorrect username or password." });
   }
 });
 
-router.get("/logout", function (req, res) {
+router.get("/logout", async function (req, res) {
   console.log("logout: " + req.session);
   req.session.destroy();
   res.redirect("/");

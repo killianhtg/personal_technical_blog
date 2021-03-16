@@ -4,10 +4,10 @@ const username = document.getElementById("username").value;
 const password = document.getElementById("password").value;
 const login = document.querySelector("#login");
 const createBlog = document.querySelector("#createBlog");
-const logout = document.querySelector("#logout");
+const logout = document.querySelector("#logoutBtn");
 
 async function loginCheck() {
-  //event.preventDefault();
+  event.preventDefault();
   console.log("check: " + username + "  " + password);
 
   const formData = new FormData(login);
@@ -29,14 +29,18 @@ async function loginCheck() {
   const res = await resRaw.json();
 
   if (res.code == 0) {
-    //reloadPage();
-    login.style.display = "none";
-    createBlog.style.display = "block";
-    logout.style.display = "inline";
+    reloadPage();
+    afterLogin();
   } else {
-    //divErr.style.display = "block";
-    //divErr.innerHTML = "Incorrect username or password.";
+    divErr.style.display = "block";
+    divErr.innerHTML = "Incorrect username or password.";
   }
+}
+
+function afterLogin() {
+  login.style.display = "none";
+  createBlog.style.display = "block";
+  logout.style.display = "block";
 }
 
 async function deleteBlog(blog) {
@@ -74,11 +78,13 @@ function renderBlog(blog) {
   blogContent.textContent = blog.content;
   divBlog.appendChild(blogContent);
 
+  console.log("main.js session========================" + loginState);
   if (loginState === 1) {
+    afterLogin();
+
     const btnDelete = document.createElement("button");
     btnDelete.textContent = "X";
     btnDelete.className = "btn btn-danger";
-    btnDelete.id = "deleteBtn";
     btnDelete.addEventListener("click", () => deleteBlog(blog));
     divBlog.appendChild(btnDelete);
   }
@@ -100,9 +106,7 @@ async function reloadPage() {
   if (resBlogs) {
     resBlogs.forEach(renderBlog);
   }
-  loginState = 0;
 }
-
-reloadPage();
+window.onload = reloadPage();
 
 login.addEventListener("submit", loginCheck);

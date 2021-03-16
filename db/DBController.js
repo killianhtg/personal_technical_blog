@@ -129,7 +129,7 @@ function DBController() {
       const usersCol = db.collection("admin");
       console.log("Collection ready, get users ", name);
       const res = await usersCol.find({ username: name }).toArray();
-      console.log("Inserted", res);
+      console.log("======================================name");
 
       return res;
     } catch (err) {

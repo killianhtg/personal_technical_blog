@@ -8,7 +8,7 @@ const cookieParser = require("cookie-parser");
 
 const logger = require("morgan");
 const indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+//var usersRouter = require("./routes/users");
 
 // require("./db/DBUtil").initPool();
 
@@ -29,6 +29,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public"))); // locate the static resources
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+//app.use("/users", usersRouter);
 
 module.exports = app;
