@@ -78,7 +78,7 @@ function renderBlog(blog) {
   blogContent.textContent = blog.content.substring(0, 100);
   divBlog.appendChild(blogContent);
 
-  console.log("main.js session========================" + loginState);
+  // console.log("main.js session========================" + loginState);
   if (loginState === 1) {
     afterLogin();
 
