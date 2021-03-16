@@ -34,7 +34,8 @@ body {
 }
 
 a {
-  color: #00b7ff;
+  color: #711b2f;
+  text-decoration-line: none;
 }
 
 #logoutBtn,
@@ -57,4 +58,9 @@ a {
   top: 0;
   left: 0;
   z-index: -1;
+}
+
+#nav {
+  background-color: rgb(176, 119, 119);
+  padding: 50px;
 }
