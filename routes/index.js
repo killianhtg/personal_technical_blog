@@ -12,11 +12,15 @@ router.get("/index", function (req, res) {
 // blogs
 router.get("/getBlogs", async (req, res) => {
   console.log("=========getBlog: " + req.session.loginUser + "==============");
+  let loginStatus = 0;
+  if (req.session.loginUser) {
+    loginStatus = 1;
+  }
 
   try {
     console.log("myDB", dbController);
     const blogs = await dbController.getBlogs();
-    res.send({ blogs: blogs });
+    res.send({ loginStatus: loginStatus, blogs: blogs });
   } catch (e) {
     console.log("Error", e);
     res.status(400).send({ err: e });
@@ -68,6 +72,33 @@ router.post("/getBlog", async (req, res) => {
     console.log("Error", e);
     res.status(400).send({ err: e });
   }
+});
+
+// users
+const findUser = async function (username, password) {
+  const pwd = await dbController.getUser(username);
+  return password === pwd;
+};
+
+// user control
+router.post("/login", function (req, res) {
+  let name = req.body.username;
+  let exist = findUser(name, req.body.password);
+
+  console.log("=========login: " + name + "==============");
+
+  if (exist) {
+    req.session.loginUser = name;
+    res.send({ code: 0, msg: "Success" });
+  } else {
+    res.send({ code: 1, msg: "Incorrect username or password." });
+  }
+});
+
+router.get("/logout", function (req, res) {
+  console.log("logout: " + req.session);
+  req.session.destroy();
+  res.redirect("/");
 });
 
 module.exports = router;

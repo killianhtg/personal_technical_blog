@@ -1,27 +1,42 @@
 const divBlogs = document.querySelector("#blog-lists");
+const divErr = document.querySelector("#error");
+const username = document.getElementById("username").value;
+const password = document.getElementById("password").value;
+const login = document.querySelector("#login");
+const createBlog = document.querySelector("#createBlog");
+const logout = document.querySelector("#logout");
 
-function check() {
-  console.log("click login");
-  // console.log(
-  //   "check: " + $("#username")[0].value + "  " + $("#password")[0].value
-  // );
-  // $.ajax({
-  //   type: "POST",
-  //   url: "http://localhost:3000/users/login",
-  //   data: {
-  //     username: $("#username")[0].value,
-  //     password: $("#password")[0].value,
-  //   },
-  //   success: function (data) {
-  //     if (data.code == 0) {
-  //       $("#login").css("display", "none");
-  //       $("#createBlog").css("display", "block");
-  //       $("#logout").css("display", "inline");
-  //     } else {
-  //       alert("Incorrect username or password.");
-  //     }
-  //   },
-  // });
+async function loginCheck() {
+  //event.preventDefault();
+  console.log("check: " + username + "  " + password);
+
+  const formData = new FormData(login);
+
+  const data = {
+    username: formData.get("username"),
+    password: formData.get("password"),
+  };
+
+  const resRaw = await fetch("/login", {
+    method: "POST",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  const res = await resRaw.json();
+
+  if (res.code == 0) {
+    //reloadPage();
+    login.style.display = "none";
+    createBlog.style.display = "block";
+    logout.style.display = "inline";
+  } else {
+    //divErr.style.display = "block";
+    //divErr.innerHTML = "Incorrect username or password.";
+  }
 }
 
 async function deleteBlog(blog) {
@@ -59,27 +74,35 @@ function renderBlog(blog) {
   blogContent.textContent = blog.content;
   divBlog.appendChild(blogContent);
 
-  // TODO: only add delete button when session is valid
-  const btnDelete = document.createElement("button");
-  btnDelete.textContent = "X";
-  btnDelete.className = "btn btn-danger";
-  btnDelete.addEventListener("click", () => deleteBlog(blog));
-  divBlog.appendChild(btnDelete);
+  if (loginState === 1) {
+    const btnDelete = document.createElement("button");
+    btnDelete.textContent = "X";
+    btnDelete.className = "btn btn-danger";
+    btnDelete.id = "deleteBtn";
+    btnDelete.addEventListener("click", () => deleteBlog(blog));
+    divBlog.appendChild(btnDelete);
+  }
 
   divBlogs.appendChild(divBlog);
 }
 
+var loginState = 0;
 async function reloadPage() {
   divBlogs.innerHTML = "";
   const resRaw = await fetch("/getBlogs");
   const res = await resRaw.json();
+  const resBlogs = res.blogs;
+  loginState = res.loginStatus;
 
   console.log("Got data");
   console.log(res);
 
-  if (res.blogs) {
-    res.blogs.forEach(renderBlog);
+  if (resBlogs) {
+    resBlogs.forEach(renderBlog);
   }
+  loginState = 0;
 }
 
 reloadPage();
+
+login.addEventListener("submit", loginCheck);

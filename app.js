@@ -16,6 +16,8 @@ app.use(
   session({
     secret: "tech blog", // to encrypt
     store: new FileStore(),
+    saveUninitialized: false,
+    resave: false,
     cookie: { maxAge: 10 * 60 * 1000 },
   })
 );

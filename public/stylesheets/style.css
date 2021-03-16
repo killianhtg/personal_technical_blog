@@ -7,16 +7,8 @@ a {
   color: #00b7ff;
 }
 
-#logoutBtn {
+#logoutBtn,
+#deleteBtn,
+#createBlog {
   display: none;
 }
-
-/* TODO: enable below for default*/
-
-/*#logoutBtn {
-  display: none;
-}*/
-
-/*.btn.btn-dangerv {
-  display: none;
-}*/
