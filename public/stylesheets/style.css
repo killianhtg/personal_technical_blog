@@ -1,14 +1,53 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 40px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.container {
+  background-color: rgb(255, 255, 255);
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.header {
+  background-color: rgb(176, 119, 119);
+  padding: 50px;
+  /*  background-image: url(./img/header-bg.jpg);
+  background-attachment: fixed;*/
+}
+
+#fullContent {
+  padding: 80px;
 }
 
 a {
   color: #00b7ff;
 }
 
+#content {
+  padding: 0 30px;
+}
+
 #logoutBtn,
 #deleteBtn,
 #createBlog {
   display: none;
+}
+
+#content-detail {
+  display: block;
+  white-space: pre-line;
 }

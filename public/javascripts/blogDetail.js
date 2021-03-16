@@ -28,7 +28,11 @@ async function loadPage() {
 
   const content = res[0].content;
 
-  contentDiv.textContent = content;
+  const contentSpan = document.createElement("div");
+  contentSpan.setAttribute("id", "content-detail");
+  contentSpan.setAttribute("markdown", "1");
+  contentSpan.textContent = content;
+  contentDiv.appendChild(contentSpan);
 }
 
 loadPage();

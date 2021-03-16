@@ -20,5 +20,9 @@
     "eslint-config-prettier": "^8.1.0",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1"
+  },
+  "nodemonConfig": {
+    "ext": "js, css, html",
+    "delay": "2"
   }
 }

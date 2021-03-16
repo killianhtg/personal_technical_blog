@@ -4,19 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Personal Technical Blog</title>
-    <link rel="icon" href="./img/favicon.ico" />
 
+    <link rel="icon" href="./img/favicon.ico" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="./stylesheets/style.css" />
+    <!-- Photo by <a href="https://unsplash.com/@nasa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">NASA</a> on <a href="/s/photos/tech?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+   -->
   </head>
 
   <body>
     <div class="container">
-      <form action=""></form>
-      <h1>Personal Technical Blog</h1>
-      <p>Welcome to PTB</p>
-
-      <div id="user-ctl" class="row">
-        <div class="col-3">
+      <!-- <img id="hd-bg" src="./img/header-bg.jpg" alt="NASA-earth" /> -->
+      <div class="header">
+        <h1>Personal Technical Blog</h1>
+        <p>Welcome to PTB</p>
+      </div>
+      <div id="fullContent" class="row">
+        <div id="user-ctl" class="col-3">
           <form id="login" class="form-signin">
             <h3>login to add blog</h3>
             <div class="mb-3">
@@ -66,7 +75,11 @@
               </div>
               <div>
                 <label class="form-label">Content: </label>
-                <input class="form-control" type="text" name="content" />
+                <textarea
+                  class="form-control"
+                  name="content"
+                  rows="10"
+                ></textarea>
               </div>
               <div>
                 <button type="submit" class="btn btn-primary">Create</button>
@@ -77,12 +90,6 @@
       </div>
     </div>
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
-      crossorigin="anonymous"
-    />
     <script src="./javascripts/main.js"></script>
   </body>
 </html>
