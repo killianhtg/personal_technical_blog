@@ -12,3 +12,8 @@ a {
 #createBlog {
   display: none;
 }
+
+#content-detail {
+  display: block;
+  white-space: pre-line;
+}

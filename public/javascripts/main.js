@@ -75,7 +75,7 @@ function renderBlog(blog) {
   divBlog.appendChild(blogName);
 
   const blogContent = document.createElement("p");
-  blogContent.textContent = blog.content;
+  blogContent.textContent = blog.content.substring(0, 100);
   divBlog.appendChild(blogContent);
 
   console.log("main.js session========================" + loginState);
