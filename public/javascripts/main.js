@@ -44,11 +44,13 @@ function renderBlog(blog) {
     return;
   }
 
+  console.log("blog:", blog);
+
   const divBlog = document.createElement("div");
 
   const blogName = document.createElement("h3");
   const blogNameAnchor = document.createElement("a");
-  blogNameAnchor.href(`/blog/${blog.name}`);
+  blogNameAnchor.href = `/blog/${blog.name}`;
   blogNameAnchor.innerText = blog.name;
   blogName.appendChild(blogNameAnchor);
   divBlog.appendChild(blogName);

@@ -62,4 +62,16 @@ router.get("/blog/:param", (req, res) => {
   res.sendFile(path.join(__dirname, "/../public/blogDetail.html"));
 });
 
+router.post("/getBlog", async (req, res) => {
+  try {
+    console.log("myDB", dbController);
+    console.log("req body", req.body);
+    const blog = await dbController.getBlog(req.body);
+    res.send(blog);
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
 module.exports = router;

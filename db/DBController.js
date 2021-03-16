@@ -70,6 +70,27 @@ function DBController() {
     }
   };
 
+  dbController.getBlog = async (name) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      console.log("Connecting to the db");
+      await client.connect();
+      console.log("Connected!");
+      const db = client.db(DB_NAME);
+      const blogsCol = db.collection("blogs");
+      console.log("Blogs Collection ready, querying with name", name);
+      const blog = await blogsCol.find({ name: name.name }).toArray();
+      console.log("Got blog");
+      //console.log(blogs);
+
+      return blog;
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  };
+
   dbController.deleteBlog = async function (blog) {
     let client;
     try {
