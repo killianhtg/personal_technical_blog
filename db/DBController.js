@@ -26,7 +26,7 @@ function DBController() {
       client.close();
     }
   };
-  
+
   dbController.getBlogs = async (query = {}) => {
     let client;
     try {

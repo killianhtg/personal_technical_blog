@@ -66,19 +66,15 @@ function renderBlog(blog) {
   console.log("blog:", blog);
 
   const divBlog = document.createElement("div");
+  const titleSpan = document.createElement("span");
 
   const blogName = document.createElement("h3");
   const blogNameAnchor = document.createElement("a");
   blogNameAnchor.href = `/blog/${blog.name}`;
   blogNameAnchor.innerText = blog.name;
   blogName.appendChild(blogNameAnchor);
-  divBlog.appendChild(blogName);
+  titleSpan.appendChild(blogName);
 
-  const blogContent = document.createElement("p");
-  blogContent.textContent = blog.content.substring(0, 100);
-  divBlog.appendChild(blogContent);
-
-  // console.log("main.js session========================" + loginState);
   if (loginState === 1) {
     afterLogin();
 
@@ -86,8 +82,14 @@ function renderBlog(blog) {
     btnDelete.textContent = "X";
     btnDelete.className = "btn btn-danger";
     btnDelete.addEventListener("click", () => deleteBlog(blog));
-    divBlog.appendChild(btnDelete);
+    blogName.appendChild(btnDelete);
   }
+
+  divBlog.appendChild(titleSpan);
+
+  const blogContent = document.createElement("p");
+  blogContent.textContent = blog.content.substring(0, 100);
+  divBlog.appendChild(blogContent);
 
   divBlogs.appendChild(divBlog);
 }
