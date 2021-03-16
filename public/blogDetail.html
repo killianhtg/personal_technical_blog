@@ -15,14 +15,19 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <nav>
-      <div id="nav_block"><a class="nav_item" href="/">Home</a> |</div>
-    </nav>
-
     <div class="container">
-      <div id="blog_name"></div>
+      <div class="row">
+        <div class="col-3">
+          <nav>
+            <div id="nav_block"><a class="nav_item" href="/">Home</a> |</div>
+          </nav>
+        </div>
+        <div id="content" class="col-9">
+          <div id="blog_name"></div>
 
-      <div id="blog_content"></div>
+          <div id="blog_content"></div>
+        </div>
+      </div>
     </div>
 
     <script src="../javascripts/blogDetail.js"></script>
