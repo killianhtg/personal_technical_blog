@@ -17,5 +17,7 @@ Tiange He and Ning Ding
 
 [video]
 
-## 
+## Slides
+
+[click here to view slides](https://docs.google.com/presentation/d/162K04na0nyRqeorpLRMq6q-2_rhpGrA3kGvZq7G785M/edit#slide=id.gbe3b3ef41f_2_11)
 
