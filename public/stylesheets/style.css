@@ -10,7 +10,13 @@ a {
 #logoutBtn {
   display: none;
 }
-/*
-#createBlog {
+
+/* TODO: enable below for default*/
+
+/*#logoutBtn {
+  display: none;
+}*/
+
+/*.btn.btn-dangerv {
   display: none;
 }*/
