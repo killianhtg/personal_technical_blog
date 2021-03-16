@@ -5,7 +5,7 @@ var url =
 
 var option = {
   auto_reconnect: true,
-  poolSize: 20,
+  poolSize: 5,
   connectTimeoutMS: 500,
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -19,7 +19,10 @@ function initPool(cb) {
   MongoClient.connect(url, option, function (err, db) {
     if (err) throw err;
 
+    console.log("[mongodb] Initialize connection pool.====================");
     mongodb = db;
+    console.log("[mongodb]connection ==============" + mongodb);
+
     if (cb && typeof cb == "function") cb(mongodb);
   });
   return MongoPool;
@@ -28,7 +31,11 @@ function initPool(cb) {
 MongoPool.initPool = initPool;
 
 function getInstance(cb) {
+  console.log("[mongodb] Get connection instance.=====================");
+
   if (!mongodb) {
+    console.log("[mongodb]instance ==============" + mongodb);
+
     initPool(cb);
   } else {
     if (cb && typeof cb == "function") cb(mongodb);

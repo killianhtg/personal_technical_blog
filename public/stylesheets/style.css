@@ -7,10 +7,8 @@ a {
   color: #00b7ff;
 }
 
-#logoutBtn {
-  display: none;
-}
-
+#logoutBtn,
+#deleteBtn,
 #createBlog {
   display: none;
 }

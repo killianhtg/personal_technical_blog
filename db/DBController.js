@@ -1,11 +1,13 @@
 var MongoPool = require("./DBUtil.js");
+var MongoClient = require("mongodb").MongoClient;
+var app = require("express")();
 
 function DBController() {
   const dbController = {};
   const DB_NAME = "personalTecBlogDB";
 
   dbController.createBlog = async (blog) => {
-    await MongoPool.getInstance(function (client) {
+    MongoPool.getInstance(function (client) {
       const blogsCol = client.db(DB_NAME).collection("blogs");
       const res = blogsCol.insertOne(blog);
       console.log("Inserted", res);
@@ -13,40 +15,19 @@ function DBController() {
     });
   };
 
-  dbController.getBlogs = async function () {
+  dbController.getBlogs = function () {
     var blogs;
-    await MongoPool.getInstance(function (client) {
-      //console.log("==============================");
+    MongoPool.getInstance(async function (client) {
+      console.log("==============================");
 
-      const blogsCol = client.db(DB_NAME).collection("blogs");
-      console.log("Blogs Collection ready, insert ", blogsCol);
+      var db = client.db(DB_NAME);
+      const blogsCol = db.collection("blogs");
+      console.log("Blogs Collection ready=============", blogsCol);
 
-      blogs = blogsCol.find({}).toArray();
-      console.log("Got blogs");
+      blogs = await blogsCol.find({}).toArray();
     });
     return blogs;
   };
-
-  // dbController.getBlogs = async (query = {}) => {
-  //   let client;
-  //   try {
-  //     client = new MongoClient(url, { useUnifiedTopology: true });
-  //     console.log("Connecting to the db");
-  //     await client.connect();
-  //     console.log("Connected!");
-  //     const db = client.db(DB_NAME);
-  //     const blogsCol = db.collection("blogs");
-  //     console.log("Blogs Collection ready, querying with ", query);
-  //     const blogs = await blogsCol.find(query).toArray();
-  //     console.log("Got blogs");
-  //     //console.log(blogs);
-
-  //     return blogs;
-  //   } finally {
-  //     console.log("Closing the connection");
-  //     client.close();
-  //   }
-  // };
 
   dbController.getUser = async function (name) {
     var pwd;
