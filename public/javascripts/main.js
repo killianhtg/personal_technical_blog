@@ -6,7 +6,7 @@ const login = document.querySelector("#login");
 const createBlog = document.querySelector("#createBlog");
 const logout = document.querySelector("#logoutBtn");
 
-async function loginCheck() {
+async function loginCheck() {    // you don't have register function on your website.
   event.preventDefault();
   console.log("check: " + username + "  " + password);
 
