@@ -27,7 +27,7 @@ function DBController() {
     }
   };
 
-  dbController.getBlogs = async (query = {}) => {
+  dbController.getBlogs = async (query = {}) => {    // you can combine all getter functions to one function.
     let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
@@ -48,7 +48,7 @@ function DBController() {
     }
   };
 
-  dbController.getBlog = async (name) => {
+  dbController.getBlog = async (name) => {     // you can combine all getter functions to one function.
     let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
@@ -89,7 +89,7 @@ function DBController() {
     }
   };
 
-  dbController.getUser = async function (name) {
+  dbController.getUser = async function (name) {   // you can combine all getter functions to one function.
     let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
@@ -111,6 +111,6 @@ function DBController() {
   };
 
   return dbController;
-}
+}    
 
 module.exports = DBController();
