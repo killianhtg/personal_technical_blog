@@ -1,0 +1,18 @@
+Overall
+1. nice modularized code organization!
+2. can't access to slide/page/video from README. Work fine from class page. Maybe update README?
+3. page style is clean and clear. I like it. it could be better if improves padding/margin/button styles. 
+4. would be good to have the feature of editing existing blog.
+5. user can login with random username and password. Does this website only allow personal(admin) login? If so, the current login is not confidential.
+
+Backend
+1. wondering the reason of using bin/www as in the start script rather than use app.js.
+2. use ES6 formatting for functions such as DBController in DBController and bin/www.
+3. in DBController, do not have the mongoDB url in code, use env variable instead.
+4. in DBController, lots of try and finally. Should we handle the exception using catch?
+5. do we need the users.js? 
+
+Frontend
+1. add more information to meta of htmls such as author names, licenses
+2. add/remove classes instead of directly using styles. e.g. for error in index.html
+3. use ES6 formation for functions in js. e.g. all the functions in js files.
